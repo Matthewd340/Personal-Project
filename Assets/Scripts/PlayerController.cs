@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float xRange = 20;
     public float zRange = 8;
     private Rigidbody playerRb;
+    public GameObject projectilePrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +21,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
         transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalInput);
-        transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput);
 
          if(transform.position.x < -xRange)
         {
@@ -43,5 +42,15 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(projectilePrefab, new Vector3(transform.position.x, transform.position.y, -4), projectilePrefab.transform.rotation);
+        }
+    }
+
+    void OnCollisionEnter (Collision other)
+    {
+        Destroy(gameObject);
     }
 }
