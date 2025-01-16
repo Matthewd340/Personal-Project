@@ -6,31 +6,44 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject cubePrefab;
     public GameObject capsulePrefab;
-    private Vector3 capsuleSpawnPos = new Vector3(-5, 1, 7);
-    private Vector3 cubeSpawnPos = new Vector3(5, 1, 7);
-    public float startDelay = 2;
-    public float repeatRate = 2;
+    private float spawnRange = 20;
+    public int waveNumber = 0;
+    public int enemyCount = 2;
     private PlayerController playerControllerScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnEnemies", startDelay, repeatRate);
+        SpawnEnemies(waveNumber);
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        if (enemyCount == 0)
+        {
+            waveNumber++;
+            SpawnEnemies(waveNumber);
+        }
     }
 
-    void SpawnEnemies()
+    void SpawnEnemies(int enemiesToSpawn)
     {
-        if (playerControllerScript.gameOver == false)
-        {
-        Instantiate(cubePrefab, cubeSpawnPos, transform.rotation);
-        Instantiate(capsulePrefab, capsuleSpawnPos, transform.rotation);
-        }
+
+            for (int i = 0; i < enemiesToSpawn; i++)
+            {
+                Instantiate(cubePrefab, GenerateSpawnPosition(), transform.rotation);
+                Instantiate(capsulePrefab, GenerateSpawnPosition(), transform.rotation);
+            }
+    }
+
+    private Vector3 GenerateSpawnPosition()
+    {
+        float spawnPosX = Random.Range(-spawnRange, spawnRange);
+        float spawnPosZ = Random.Range(-spawnRange, spawnRange);
+        Vector3 randomPos = new Vector3(spawnPosX, 1, spawnPosZ);
+        return randomPos;
     }
 }

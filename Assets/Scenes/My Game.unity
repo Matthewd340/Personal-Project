@@ -343,8 +343,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 6404023130137406021, guid: 5f5fba04ad80649c4a75c1e6e2c94f2e, type: 3}
   capsulePrefab: {fileID: 4464294759408368411, guid: ede0d6f8ea004440aa76402977712345, type: 3}
-  startDelay: 2
-  repeatRate: 2
+  waveNumber: 0
+  enemyCount: 2
 --- !u!4 &852725376
 Transform:
   m_ObjectHideFlags: 0
@@ -484,7 +484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2440619561208263951, guid: 3640453e07bcc4dc589744d92c6d59e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2440619561208263951, guid: 3640453e07bcc4dc589744d92c6d59e2, type: 3}
       propertyPath: m_LocalPosition.z

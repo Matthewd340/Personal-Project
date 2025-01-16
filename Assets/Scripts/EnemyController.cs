@@ -6,9 +6,9 @@ public class EnemyController : MonoBehaviour
 {
     private Rigidbody enemyRb;
     private GameObject player;
-    private float enemySpeed = 10;
+    private float enemySpeed = 1;
     private SpawnManager spawnManagerScript;
-    private float speedModifier = 0.5f;
+    private float speedModifier = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,5 +38,10 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+    }
+
+    public void IncreaseSpeedPerWave(int waveCount)
+    {
+        enemySpeed += speedModifier * waveCount;
     }
 }
